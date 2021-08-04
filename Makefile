@@ -4,7 +4,7 @@ PACKAGE		?= $(shell go list)
 PACKAGES	?= $(shell go list ./...)
 FILES		?= $(shell find . -type f -name '*.go' -not -path "./vendor/*")
 
-.PHONY: help clean fmt lint vet test test-cover build all run
+.PHONY: help clean fmt lint vet test test-cover build all
 
 default: help
 
@@ -68,6 +68,3 @@ test-all: test test-cover
 
 binary:   ## Build Golang application binary with settings to enable it to run in a Docker scratch container.
 	CGO_ENABLED=0 GOOS=linux go build  -ldflags '-s' -installsuffix cgo example/main.go
-
-run:
-	go run example/main.go
