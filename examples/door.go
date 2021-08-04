@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 
 	"github.com/sebinbabu/zostate"
 )
@@ -17,6 +18,7 @@ const (
 
 func main() {
 	machine, err := zostate.NewMachine(
+		"door",
 		CLOSED,
 		zostate.States{
 			{
@@ -49,4 +51,10 @@ func main() {
 
 	current, err = machine.Transition("vivi")
 	fmt.Println("current", current, err)
+
+	dot := zostate.Visualize(machine)
+	err = ioutil.WriteFile("./door.dot", []byte(dot), 0644)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
