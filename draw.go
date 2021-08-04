@@ -6,7 +6,7 @@ import (
 	"sort"
 )
 
-func Visualize(machine *Machine) string {
+func DrawMachine(machine *Machine) string {
 	var buf bytes.Buffer
 	states := machine.States()
 

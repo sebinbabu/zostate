@@ -52,7 +52,8 @@ func main() {
 	current, err = machine.Transition("vivi")
 	fmt.Println("current", current, err)
 
-	dot := zostate.Visualize(machine)
+	dot := zostate.DrawMachine(machine)
+
 	err = ioutil.WriteFile("./door.dot", []byte(dot), 0644)
 	if err != nil {
 		fmt.Println(err)
