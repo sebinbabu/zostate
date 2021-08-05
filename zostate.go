@@ -1,11 +1,11 @@
 // Package zostate implements a finite state machine.
 package zostate
 
-type TransitionType string
+type EventType string
 type StateType string
 
 type machineState struct {
-	Transitions map[TransitionType]StateType
+	Transitions map[EventType]StateType
 }
 
 type Machine struct {
@@ -16,7 +16,7 @@ type Machine struct {
 }
 
 type Transition struct {
-	Name TransitionType
+	Name EventType
 	Dst  StateType
 }
 
@@ -34,7 +34,7 @@ func NewMachine(name string, initial StateType, states States) (*Machine, error)
 
 	for _, s := range states {
 		state := machineState{
-			Transitions: make(map[TransitionType]StateType),
+			Transitions: make(map[EventType]StateType),
 		}
 
 		for _, t := range s.Transitions {
@@ -64,7 +64,7 @@ func (m *Machine) Current() StateType {
 	return m.current
 }
 
-func (m *Machine) Transition(event TransitionType) (StateType, error) {
+func (m *Machine) Transition(event EventType) (StateType, error) {
 	current := m.Current()
 	next, ok := m.states[current].Transitions[event]
 

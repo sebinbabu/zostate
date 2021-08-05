@@ -13,8 +13,9 @@ func DrawMachine(machine *Machine) string {
 	sortStates(states)
 
 	writeHeader(&buf, machine.name)
-	writeTransitions(&buf, machine.current, states)
+	writeTransitions(&buf, machine.initial, states)
 	writeStates(&buf, states)
+	writeStartPoint(&buf, machine.initial)
 	writeFooter(&buf)
 
 	return buf.String()
@@ -52,6 +53,12 @@ func writeStates(buf *bytes.Buffer, states States) {
 		buf.WriteString(fmt.Sprintf(`    "%s";`, k.Name))
 		buf.WriteString("\n")
 	}
+}
+
+func writeStartPoint(buf *bytes.Buffer, initial StateType) {
+	buf.WriteString(fmt.Sprintln("    node [width=0.3 shape=point style=filled];"))
+	buf.WriteString(fmt.Sprintf(`    "" -> "%s";`, initial))
+	buf.WriteString("\n")
 }
 
 func writeFooter(buf *bytes.Buffer) {
