@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
+	"os"
+	"strings"
 
 	"github.com/sebinbabu/zostate"
 )
@@ -41,21 +43,17 @@ func main() {
 		return
 	}
 
-	fmt.Println("current", machine.Current())
+	fmt.Fprintln(os.Stderr, "current", machine.Current())
 
 	current, err := machine.Transition(TOGGLE)
-	fmt.Println("current", current, err)
+	fmt.Fprintln(os.Stderr, "current", current, err)
 
 	current, err = machine.Transition(TOGGLE)
-	fmt.Println("current", current, err)
+	fmt.Fprintln(os.Stderr, "current", current, err)
 
 	current, err = machine.Transition("vivi")
-	fmt.Println("current", current, err)
+	fmt.Fprintln(os.Stderr, "current", current, err)
 
 	dot := zostate.DrawMachine(machine)
-
-	err = ioutil.WriteFile("./door.dot", []byte(dot), 0644)
-	if err != nil {
-		fmt.Println(err)
-	}
+	io.Copy(os.Stdout, strings.NewReader(dot))
 }
