@@ -10,27 +10,27 @@ import (
 )
 
 const (
-	Start           zostate.StateType = "START"
-	EnterPIN        zostate.StateType = "ENTER_PIN"
-	SelectOperation zostate.StateType = "SELECT_OPERATION"
-	WaitForDeposit  zostate.StateType = "WAIT_FOR_DEPOSIT"
-	EnterAmount     zostate.StateType = "ENTER_AMOUNT"
-	ConfirmAmount   zostate.StateType = "CONFIRM_AMOUNT"
-	WithdrawSuccess zostate.StateType = "WITHDRAW_SUCCESS"
-	DepositSuccess  zostate.StateType = "DEPOSIT_SUCCESS"
+	Start           zostate.StateType = "Start"
+	EnterPIN        zostate.StateType = "EnterPIN"
+	SelectOperation zostate.StateType = "SelectOperation"
+	WaitForDeposit  zostate.StateType = "WaitForDeposit"
+	EnterAmount     zostate.StateType = "EnterAmount"
+	ConfirmAmount   zostate.StateType = "ConfirmAmount"
+	WithdrawSuccess zostate.StateType = "WithdrawSuccess"
+	DepositSuccess  zostate.StateType = "DepositSuccess"
 )
 
 const (
-	CardInserted       zostate.EventType = "CARD_INSERTED"
-	BadPINEntered      zostate.EventType = "BAD_PIN_ENTERED"
-	CorrectPINEntered  zostate.EventType = "CORRECT_PIN_ENTERED"
-	DepositSelected    zostate.EventType = "DEPOSIT_SELECTED"
-	WithdrawalSelected zostate.EventType = "WITHDRAWAL_SELECTED"
-	AmountEntered      zostate.EventType = "AMOUNT_ENTERED"
-	AmountDeposited    zostate.EventType = "AMOUNT_DEPOSITED"
-	ConfirmedYes       zostate.EventType = "CONFIRMED_YES"
-	ConfirmedNo        zostate.EventType = "CONFIRMED_NO"
-	CardWithdrawn      zostate.EventType = "CARD_WITHDRAWN"
+	CardInserted       zostate.EventType = "CardInserted"
+	BadPINEntered      zostate.EventType = "BadPINEntered"
+	CorrectPINEntered  zostate.EventType = "CorrectPINEntered"
+	DepositSelected    zostate.EventType = "DepositSelected"
+	WithdrawalSelected zostate.EventType = "WithdrawalSelected"
+	AmountEntered      zostate.EventType = "AmountEntered"
+	AmountDeposited    zostate.EventType = "AmountDeposited"
+	ConfirmedYes       zostate.EventType = "ConfirmedYes"
+	ConfirmedNo        zostate.EventType = "ConfirmedNo"
+	CardWithdrawn      zostate.EventType = "CardWithdrawn"
 )
 
 func main() {
@@ -41,52 +41,52 @@ func main() {
 			{
 				Name: Start,
 				Transitions: zostate.Transitions{
-					{Name: CardInserted, Dst: EnterPIN},
+					{Event: CardInserted, Dst: EnterPIN},
 				},
 			},
 			{
 				Name: EnterPIN,
 				Transitions: zostate.Transitions{
-					{Name: BadPINEntered, Dst: Start},
-					{Name: CorrectPINEntered, Dst: SelectOperation},
+					{Event: BadPINEntered, Dst: Start},
+					{Event: CorrectPINEntered, Dst: SelectOperation},
 				},
 			},
 			{
 				Name: SelectOperation,
 				Transitions: zostate.Transitions{
-					{Name: DepositSelected, Dst: WaitForDeposit},
-					{Name: WithdrawalSelected, Dst: EnterAmount},
+					{Event: DepositSelected, Dst: WaitForDeposit},
+					{Event: WithdrawalSelected, Dst: EnterAmount},
 				},
 			},
 			{
 				Name: WaitForDeposit,
 				Transitions: zostate.Transitions{
-					{Name: AmountDeposited, Dst: DepositSuccess},
+					{Event: AmountDeposited, Dst: DepositSuccess},
 				},
 			},
 			{
 				Name: EnterAmount,
 				Transitions: zostate.Transitions{
-					{Name: AmountEntered, Dst: ConfirmAmount},
+					{Event: AmountEntered, Dst: ConfirmAmount},
 				},
 			},
 			{
 				Name: ConfirmAmount,
 				Transitions: zostate.Transitions{
-					{Name: ConfirmedYes, Dst: WithdrawSuccess},
-					{Name: ConfirmedNo, Dst: EnterAmount},
+					{Event: ConfirmedYes, Dst: WithdrawSuccess},
+					{Event: ConfirmedNo, Dst: EnterAmount},
 				},
 			},
 			{
 				Name: WithdrawSuccess,
 				Transitions: zostate.Transitions{
-					{Name: CardWithdrawn, Dst: Start},
+					{Event: CardWithdrawn, Dst: Start},
 				},
 			},
 			{
 				Name: DepositSuccess,
 				Transitions: zostate.Transitions{
-					{Name: CardWithdrawn, Dst: Start},
+					{Event: CardWithdrawn, Dst: Start},
 				},
 			},
 		},

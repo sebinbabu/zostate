@@ -30,7 +30,7 @@ func writeTransitions(buf *bytes.Buffer, current StateType, states States) {
 	for _, k := range states {
 		if k.Name == current {
 			for _, t := range k.Transitions {
-				buf.WriteString(fmt.Sprintf(`    "%s" -> "%s" [ label = "%s" ];`, k.Name, t.Dst, t.Name))
+				buf.WriteString(fmt.Sprintf(`    "%s" -> "%s" [ label = "%s" ];`, k.Name, t.Dst, t.Event))
 				buf.WriteString("\n")
 			}
 		}
@@ -39,7 +39,7 @@ func writeTransitions(buf *bytes.Buffer, current StateType, states States) {
 	for _, k := range states {
 		if k.Name != current {
 			for _, t := range k.Transitions {
-				buf.WriteString(fmt.Sprintf(`    "%s" -> "%s" [ label = "%s" ];`, k.Name, t.Dst, t.Name))
+				buf.WriteString(fmt.Sprintf(`    "%s" -> "%s" [ label = "%s" ];`, k.Name, t.Dst, t.Event))
 				buf.WriteString("\n")
 			}
 		}
@@ -72,7 +72,7 @@ func sortStates(states States) {
 
 	for _, state := range states {
 		sort.Slice(state.Transitions, func(i, j int) bool {
-			return state.Transitions[i].Name < state.Transitions[j].Name
+			return state.Transitions[i].Event < state.Transitions[j].Event
 		})
 	}
 }

@@ -16,8 +16,8 @@ type Machine struct {
 }
 
 type Transition struct {
-	Name EventType
-	Dst  StateType
+	Event EventType
+	Dst   StateType
 }
 
 type Transitions []Transition
@@ -38,7 +38,7 @@ func NewMachine(name string, initial StateType, states States) (*Machine, error)
 		}
 
 		for _, t := range s.Transitions {
-			state.Transitions[t.Name] = t.Dst
+			state.Transitions[t.Event] = t.Dst
 		}
 
 		machineStates[s.Name] = state
@@ -87,8 +87,8 @@ func (m *Machine) States() States {
 
 		for tname, dst := range state.Transitions {
 			s.Transitions = append(s.Transitions, Transition{
-				Name: tname,
-				Dst:  dst,
+				Event: tname,
+				Dst:   dst,
 			})
 		}
 

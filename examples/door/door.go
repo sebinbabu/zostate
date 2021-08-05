@@ -15,7 +15,7 @@ const (
 )
 
 const (
-	TOGGLE zostate.TransitionType = "Toggle"
+	TOGGLE zostate.EventType = "Toggle"
 )
 
 func main() {
@@ -26,13 +26,13 @@ func main() {
 			{
 				Name: OPEN,
 				Transitions: zostate.Transitions{
-					{Name: TOGGLE, Dst: CLOSED},
+					{Event: TOGGLE, Dst: CLOSED},
 				},
 			},
 			{
 				Name: CLOSED,
 				Transitions: zostate.Transitions{
-					{Name: TOGGLE, Dst: OPEN},
+					{Event: TOGGLE, Dst: OPEN},
 				},
 			},
 		},
