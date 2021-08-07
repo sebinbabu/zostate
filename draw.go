@@ -6,7 +6,7 @@ import (
 	"sort"
 )
 
-// DrawMachine accepts a Machine and "draws" it and returns a string
+// DrawMachine accepts a Machine, "draws" it and returns a string
 // in the Graphviz DOT format. This string can be parsed by Graphviz
 // to be converted into a diagram.
 func DrawMachine(machine *Machine) string {

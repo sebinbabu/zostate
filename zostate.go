@@ -40,7 +40,7 @@ type StateDesc struct {
 type States []StateDesc
 
 // NewMachine returns an instance of the state machine (Machine) after it accepts
-// the name of the details of the machine, such as initial state & state descriptions.
+// the details of the machine, such as initial state & state descriptions.
 // It returns an error if the parameters are invalid.
 func NewMachine(name string, initial StateType, states States) (*Machine, error) {
 	mStates := make(map[StateType]state)
