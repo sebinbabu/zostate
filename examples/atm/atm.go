@@ -97,7 +97,7 @@ func main() {
 		return
 	}
 
-	fmt.Fprintln(os.Stderr, "current", machine.Current())
+	fmt.Fprintln(os.Stderr, "current state: ", machine.Current())
 
 	dot := zostate.DrawMachine(machine)
 	io.Copy(os.Stdout, strings.NewReader(dot))
