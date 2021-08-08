@@ -54,6 +54,7 @@ func main() {
 1. Add tests
 2. Add support for callbacks for events, states & transitions
 3. Implement [statecharts](https://statecharts.dev/)
+4. Add mutexes to race avoid conditions. 
 
 ## References
 
