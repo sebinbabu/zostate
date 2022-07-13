@@ -78,6 +78,11 @@ func (m *Machine) Current() StateType {
 	return m.current
 }
 
+// Reset resets the state machine to the initial state
+func (m *Machine) Reset() {
+	m.current = ""
+}
+
 // getNextState returns the next state for a given event after considering
 // the current state and it's transitions. If a valid transition doesn't exist
 // it returns an error.
